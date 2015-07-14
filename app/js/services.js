@@ -1,7 +1,7 @@
 var app = angular.module('myModule');
 
 app.factory('Recipe', ['$resource', function ($resource) {
-                return $resource('/recipies/:id', {id: '@id'});
+                return $resource('http://localhost:8080/api/recipes/:id', {id: '@id'}, {query: {method: 'GET', isArray:false}});
         }]);
 
 app.factory('MultiRecipeLoader', ['Recipe', '$q', function (Recipe, $q) {
