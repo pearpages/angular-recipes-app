@@ -1,6 +1,9 @@
 module.exports = {
         recipes: function () {
                 return module.recipes;
+        },
+        getNextId: function (){
+                return 3;
         }
 };
 
@@ -16,7 +19,8 @@ module.recipes = {
                                 "ingredientName": "Chips Ahoy"
                         }
                 ],
-                "instructions": "1. Go buy a packet of Chips Ahoy\n 2. Blah blah"
+                "instructions": "1. Go buy a packet of Chips Ahoy\n\
+ 2. Blah blah"
         },
         2: {
                 "id": "2",
@@ -29,7 +33,8 @@ module.recipes = {
                                 "ingredientName": "Chips Ahoy"
                         }
                 ],
-                "instructions": "1. Go buy a packet of Chips Ahoy\n 2. Blah blah"
+                "instructions": "1. Go buy a packet of Chips Ahoy\n\
+2. Blah blah"
         }
 };
         

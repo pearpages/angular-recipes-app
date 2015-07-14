@@ -2,6 +2,7 @@
 
 var mockup = require('./recipes');
 var recipes = mockup.recipes();
+var nextId = mockup.getNextId();
 
 // BASE SETUP
 // =============================================================================
@@ -28,7 +29,7 @@ router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); //CORS accepted
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE'); //cors accepted
     res.header('Access-Control-Allow-Headers', 'Content-Type'); // cors accepted
-    console.log('request.');
+    console.log('request');
     next(); // make sure we go to the next routes and don't stop here
 });
 
@@ -44,71 +45,81 @@ router.route('/recipes')
     // create a submission (accessed at POST http://localhost:8080/api/recipes)
     .post(function(req, res) {
         
-		//we assume the objects are well formed
-		var list = req.body;
-		for (var id in list) {
-			if (list.hasOwnProperty(id)) {
-				if(typeof(recipes[id]) === 'undefined'){
-					recipes[id] = list[id];
-					console.log('inserted '+id);
-				}
-			}else{
-				console.log('already existing '+id);
-			}
-		}
+		var recipe = req.body;
+                recipe.id = nextId;
+                recipes[nextId] = recipe;
+                nextId++;
+                
 		
-		res.json({ message: 'Submission created!' });
+		res.json(recipe);
     })
 	
 	// get all the recipes (accessed at GET http://localhost:8080/api/recipes)
     .get(function(req, res) {
        
-			console.log('get all recipes');
+                console.log(recipes);
             res.json(recipes);
        
     });
 	
-// on routes that end in /recipes/:submission_id
+// on routes that end in /recipes/:recipe_id
 // ----------------------------------------------------
-router.route('/recipes/:submission_id')
+router.route('/recipes/:recipe_id')
 
-    // get the submission with that id (accessed at GET http://localhost:8080/api/recipes/:submission_id)
+    // get the submission with that id (accessed at GET http://localhost:8080/api/recipes/:recipe_id)
     .get(function(req, res) {
-		var id = req.params.submission_id;
+		var id = req.params.recipe_id;
 		
 		if(typeof(recipes[id]) === 'undefined'){
 			res.status(404).send('Not found');
 		}else{
-			console.log('get submission '+id);
+			console.log(recipes[id]);
 			res.json(recipes[id]);
 		}
     })
 	
-	 // update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
-    .put(function(req, res) {
+     // update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
+    .post(function(req, res) {
 		
-		var id = req.params.submission_id;
+		var id = req.params.recipe_id;
 		
 		if(typeof(recipes[id]) === 'undefined'){
 			res.status(404).send('Not found');
 		}else{
-			console.log('submission '+id+' updated');
+			console.log(recipes[id]);
 			recipes[id] = req.body;
+                        res.json(recipes[id]);
 		}
 		
-		res.json({ message: 'Submission updated!' });
+		
+    })    
+        
+	 // update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
+    .put(function(req, res) {
+		
+		var id = req.params.recipe_id;
+		
+		if(typeof(recipes[id]) === 'undefined'){
+			res.status(404).send('Not found');
+		}else{
+			console.log(recipes[id]);
+			recipes[id] = req.body;
+                        res.json(recipes[id]);
+		}
+		
+		
     })
 	
 	 // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
     .delete(function(req, res) {
 		
-		var id = req.params.submission_id;
+		var id = req.params.recipe_id;
 		
 		if(typeof(recipes[id]) === 'undefined'){
 			res.status(404).send('Not found');
 		}else{
 			delete recipes[id];
-			console.log('submission '+id+' deleted');
+			console.log(recipes);
 			res.json({ message: 'Successfully deleted' });
 		}
 		
