@@ -1,7 +1,7 @@
 var app = angular.module('myModule');
 
 app.factory('Recipe', ['$resource', function ($resource) {
-                return $resource('/recipies/:id', {id: '#id'});
+                return $resource('/recipies/:id', {id: '@id'});
         }]);
 
 app.factory('MultiRecipeLoader', ['Recipe', '$q', function (Recipe, $q) {
@@ -10,7 +10,7 @@ app.factory('MultiRecipeLoader', ['Recipe', '$q', function (Recipe, $q) {
                         Recipe.query(function (recipes) {
                                 delay.resolve(recipes);
                         }, function () {
-                                delay.reject('Unable to fetch recipes')
+                                delay.reject('Unable to fetch recipes');
                         });
                         return delay.promise;
                 };

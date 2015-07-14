@@ -8,7 +8,7 @@ var app = angular.module('myModule', ['ngRoute','ngResource'])
                                                         return MultiRecipeLoader();
                                                 }
                                         },
-                                        templateUrl: '/views/list.html'
+                                        templateUrl: 'views/list.html'
                                 })
                                 .when('/edit/:recipeId', {
                                         controller: 'EditCtrl',
@@ -17,7 +17,7 @@ var app = angular.module('myModule', ['ngRoute','ngResource'])
                                                         return RecipeLoader();
                                                 }
                                         },
-                                        templateUrl: '/view/recipeForm.html'
+                                        templateUrl: 'views/recipeForm.html'
                                 })
                                 .when('/view/:recipeId', {
                                         controller: 'ViewCtrl',
@@ -26,11 +26,11 @@ var app = angular.module('myModule', ['ngRoute','ngResource'])
                                                         return RecipeLoader();
                                                 }
                                         },
-                                        templateUrl: '/view/viewRecipe.html'
+                                        templateUrl: 'views/viewRecipe.html'
                                 })
                                 .when('/new',{
                                         controller: 'NewCtrl',
-                                        templateUrl: '/view/recipeForm.html'
+                                        templateUrl: 'views/recipeForm.html'
                                 })
                                 .otherwise({redirectTo: '/'});
                 }]);
