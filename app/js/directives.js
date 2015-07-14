@@ -1,7 +1,7 @@
 var app = angular.module('myModule');
 
 /* This directive will be shown and hidden when the routes change and while the page is still loading information. */
-app.directive('butterbar',['$rootscope',function($rootScope){
+app.directive('butterbar',['$rootScope',function($rootScope){
         return {
                 link: function (scope,element,attrs){
                         element.addClass('hide');
