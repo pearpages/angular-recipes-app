@@ -1,4 +1,4 @@
-# recipes
+# angular-recipes-app
 AngularJS app
 
 ## How to execute
