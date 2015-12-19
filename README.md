@@ -1,5 +1,6 @@
 # angular-recipes-app
-AngularJS app
+
+AngularJS app as an example for templating.
 
 ## How to execute
 
